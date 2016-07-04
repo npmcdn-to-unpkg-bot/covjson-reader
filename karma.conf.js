@@ -9,12 +9,12 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify', 'mocha'],
+    frameworks: ['mocha'],
 
     // list of files / patterns to load and/or serve in the browser
     files: [
       {pattern: 'test/fixtures/**/*.covjson', included: false, served: true},
-      'test/**/*.js'
+      'test/bundle.js'
     ],
 
     proxies: {
@@ -24,19 +24,6 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
     ],
-
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'test/**/*.js': ['browserify']
-    },
-    
-    browserify: {
-      transform: [
-        ['babelify', {presets: ['es2015']}]
-      ]
-    },
         
     // test results reporter to use
     // possible values: 'dots', 'progress'

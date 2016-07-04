@@ -5,15 +5,15 @@ import uglify from 'rollup-plugin-uglify'
 
 export default options => {
   return {
-    entry: 'src/reader.js',
+    entry: options.entry || 'src/reader.js',
     plugins: [
       babel({ babelrc: false, presets: ['es2015-rollup'], exclude: 'node_modules/**' }),
-      nodeResolve({ jsnext: true, browser: true }),
+      nodeResolve({ jsnext: true, browser: true, preferBuiltins: false }),
       commonjs({ include: 'node_modules/**' })
     ].concat(options.minify ? [uglify()] : []),
-    external: ['covutils'],
+    external: options.external || ['covutils'],
 
-    dest: 'covjson-reader.' + (options.minify ? 'min' : 'src') + '.js',
+    dest: options.dest || 'covjson-reader.' + (options.minify ? 'min' : 'src') + '.js',
     format: 'iife',
     moduleName: 'CovJSON',
     globals: {
